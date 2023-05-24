@@ -1,6 +1,9 @@
 import { useState } from "react";
+import styles from "../src/app.module.css";
 import { Header } from "./components/Header";
-import './global.css';
+import { Post } from "./components/Post";
+import { Sidebar } from "./components/Sidebar";
+import "./global.css";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -8,7 +11,13 @@ function App() {
   return (
     <>
       <Header />
-      Um dia vai chegar o dia
+      <div className={styles.wrapper}>
+        <Sidebar />
+        <main>
+          <Post />
+          <Post />
+        </main>
+      </div>
     </>
   );
 }
