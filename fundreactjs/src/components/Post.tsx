@@ -1,14 +1,12 @@
+import { Avatar } from "./Avatar";
+import { Comment } from "./Comment";
 import styles from "./Post.module.css";
 export const Post = () => {
   return (
     <article className={styles.post}>
       <header>
         <div className={styles.author}>
-          <img
-            className={styles.avatar}
-            src="https://github.com/KAUANPEREIRA.png"
-            alt=""
-          />
+          <Avatar srcOfc="https://github.com/KAUANPEREIRA.png" />
           <div className={styles.authorInfo}>
             <strong>Kauan Pereira</strong>
             <span>Web developer</span>
@@ -23,7 +21,21 @@ export const Post = () => {
           no NLW Return, evento da Rocketseat. O nome do projeto é DoctorCare 🚀
         </p>
         <a href="#">👉 jane.design/doctorcare</a>
+        {""}
         <a href="#"> #novoprojeto #nlw #rocketseat</a>
+        {""}
+      </div>
+      <form className="formComment">
+        <strong>Deixe seu feedback</strong>
+        <textarea placeholder="Deixe seu comentario" />
+        <footer>
+          <button className="btn" type="submit">
+            Publicar
+          </button>
+        </footer>
+      </form>
+      <div className={styles.commentList}>
+        <Comment />
       </div>
     </article>
   );
