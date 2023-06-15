@@ -1,6 +1,12 @@
 import { ThumbsUp, Trash } from "phosphor-react";
 import style from "./Coment.module.css";
-export const Comment = () => {
+type Props = {
+  content: string;
+  deleteComment: (comentario: any) => void;
+};
+
+export const Comment = ({ content, deleteComment }: Props) => {
+  const handleDeleteComment = () => {};
   return (
     <div className={style.comment}>
       <img src="https://github.com/KAUANPEREIRA.png" />
@@ -11,11 +17,11 @@ export const Comment = () => {
               <strong>Kauan Pereira</strong>
               <time dateTime="">Cerca de 1h atrás</time>
             </div>
-            <div title="Deletar comentario">
+            <div onClick={deleteComment(content)} title="Deletar comentario">
               <Trash size={20} />
             </div>
           </header>
-          <p>Muito bom Parabens👏👏</p>
+          <p>{content}</p>
         </div>
         <footer>
           <div className={style.btn}>

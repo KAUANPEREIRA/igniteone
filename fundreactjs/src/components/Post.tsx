@@ -16,13 +16,23 @@ export const Post = ({ author, content, publishedAt }: Props) => {
     minute: "2-digit",
   }).format(publishedAt);
 
-  const [comment, setComments] = useState([1, 2]);
-  const comments = [1, 2];
-
-  function handleCreateNewComment() {
-    event.preventDefault();
-    setComments([1, 2, 3]);
+  const [comment, setComments] = useState(["Post bacana"]);
+  const [textoArea, setTextoArea] = useState("");
+  console.log({ textoArea });
+  function handleCreateNewComment(event: Event | undefined) {
+    event?.preventDefault();
+    // console.log(event.target.comentario.value);
+    setComments([...comment, textoArea]);
+    setTextoArea("");
   }
+
+  const deleteComment = (commentToDelete: any) => {
+    const newsComments = comment.filter((item) => {
+      return item !== commentToDelete;
+    });
+
+    setComments(newsComments);
+  };
   return (
     <article className={styles.post}>
       <header>
@@ -48,7 +58,12 @@ export const Post = ({ author, content, publishedAt }: Props) => {
       </div>
       <form onSubmit={handleCreateNewComment} className="formComment">
         <strong>Deixe seu feedback</strong>
-        <textarea placeholder="Deixe seu comentario" />
+        <textarea
+          value={textoArea}
+          placeholder="Deixe seu comentario"
+          name="comentario"
+          onChange={(e) => setTextoArea(e.target.value)}
+        />
         <footer>
           <button className="btn" type="submit">
             Publicar
@@ -56,8 +71,10 @@ export const Post = ({ author, content, publishedAt }: Props) => {
         </footer>
       </form>
       <div className={styles.commentList}>
-        {comments.map((item, key) => {
-          return <Comment />;
+        {comment.map((item, index) => {
+          return (
+            <Comment content={item} key={index} deleteComment={deleteComment} />
+          );
         })}
       </div>
     </article>
